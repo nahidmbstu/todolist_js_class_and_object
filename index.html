@@ -4,22 +4,60 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      html,
+      body {
+        margin: 10px 10px;
+      }
+      li {
+        cursor: not-allowed;
+        padding: 5px;
+      }
+    </style>
   </head>
   <body>
+    <h1>Javascript class and Object example with a simple todo list app.</h1>
     <input name="todo" id="input" placeholder="write todo" />
-    <ul id="todo-list"></ul>
-
+    <ul id="todo-list" onclick="remove()"></ul>
     <button onclick="addtodo()">Add Todo</button>
   </body>
   <script src="todo.js"></script>
   <script>
+    let list = document.getElementById("todo-list");
+
+    // create a object of Class
+
+    let listEle = new MakeTodoList(list);
+
+    listEle.DummyData = ["Play FootBall", "Do Homework"]; // setter method for Dummy Data
+
+    console.log("current  ...........", listEle.getList); //   getter method
+
+    // add something to list
+
     function addtodo() {
       let input = document.getElementById("input").value;
-      let list = document.getElementById("todo-list");
+      listEle.addTodo(input); //  calling method from class
 
-      let listEle = new MakeTodoList(list);
-      listEle.addTodo(input);
-      console.log(listEle.List);
+      console.log("current  ...........", listEle.getList); //   getter method
+    }
+
+    // simple utility function
+
+    function getEventTarget(e) {
+      e = e || window.event;
+      return e.target || e.srcElement;
+    }
+
+    // delete some item from list
+
+    function remove() {
+      let updated = document.getElementById("todo-list");
+      updated.onclick = function(event) {
+        var target = getEventTarget(event);
+        listEle.removeTodo(target.innerText);
+        console.log("current  ...........", listEle.getList); //   getter method
+      };
     }
   </script>
 </html>
