@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input name="todo" id="input" placeholder="write todo" />
+    <ul id="todo-list"></ul>
+
+    <button onclick="addtodo()">Add Todo</button>
+  </body>
+  <script src="todo.js"></script>
+  <script>
+    function addtodo() {
+      let input = document.getElementById("input").value;
+      let list = document.getElementById("todo-list");
+
+      let listEle = new MakeTodoList(list);
+      listEle.addTodo(input);
+      console.log(listEle.List);
+    }
+  </script>
+</html>
